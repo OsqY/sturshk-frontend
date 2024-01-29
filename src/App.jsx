@@ -6,6 +6,7 @@ import ErrorPage from "../src/views/ErrorPage"
 import CallbackPage from "./Components/auth/CallbackPage"
 import ClientProfilePage from "../src/views/ClientProfilePage"
 import ClientPage from "../src/views/ClientPage"
+import ProductsPage from "../src/views/ProductsPage"
 import { AuthenticationGuard } from "./Components/auth/AuthenticationGuard"
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path='/client/profile' element={<AuthenticationGuard component={ClientProfilePage} />} />
         <Route path="/callback" element={<CallbackPage />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path='/products' element={<ProductsPage />} />
       </Routes>
     </>
   )

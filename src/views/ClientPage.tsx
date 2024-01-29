@@ -6,22 +6,24 @@ const ClientPage = () => {
   const callApi = async () => {
     try {
       const token = await getAccessTokenSilently({
-        autorizationParams: {
+        authorizationParams: {
           audience: import.meta.env.VITE_AUTH0_AUDIENCE
         }
       })
-      console.log("token: " + token)
-
+      console.log(token)
       const response = await fetch(
         `${import.meta.env.VITE_API_SERVER_URL}/api/client`, {
         method: 'GET',
-        authorization: `Bearer ${token}`
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
       })
-      const responseData = response.data
+      const responseData = await response.json()
 
       alert(responseData.message)
     } catch (err) {
       alert(err)
+      console.log(err)
     }
   }
 
