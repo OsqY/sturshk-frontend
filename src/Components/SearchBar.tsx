@@ -19,7 +19,9 @@ const SearchBar = () => {
     }
   }
   return (
-    <input className="outline-none w-full" id="search" name="search" type="text" placeholder="Search..." defaultValue='' ref={ref} onKeyDown={handleKeyDown} />
+    <div className="my-2">
+      <input className="outline-none w-full pl-2" id="search" name="search" type="text" placeholder="Search..." defaultValue='' ref={ref} onKeyDown={handleKeyDown} />
+    </div>
   )
 };
 

@@ -1,6 +1,6 @@
-import React from 'react';
 
 const ProductCard = ({ product }) => {
+
   return (
     <div className="p-4 m-2 border rounded shadow-lg">
       <img src={product.urlImages[0]} alt={product.name} className="w-full h-64 object-cover" />

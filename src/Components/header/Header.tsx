@@ -42,6 +42,12 @@ const Header = () => {
             Home
           </Link>
           <Link
+            to="/products"
+            className="text-lg font-semibold transition duration-100 hover:text-gray-500 active:text-gray-700"
+          >
+            Products
+          </Link>
+          <Link
             to="/client"
             className="text-lg font-semibold transition duration-100 hover:text-gray-500 active:text-gray-700"
           >

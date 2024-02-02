@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <>
       <SearchBar />
-      <div className="relative">
+      <div className="relative my-2">
         <img src={girlImage} className="w-full max-h-screen object-cover filter brightness-50" />
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center mx-auto py-2">
           <div className="px-6 mb-4 text-justify text-white font-bold text-sm sm:text-lg md:text-xl">
