@@ -1,6 +1,23 @@
+import { useAuth0 } from "@auth0/auth0-react"
 
-export const addProduct = async (product, token: string) {
-  const res = await fetch("http://localhost:8080/api/admin/products", {
+async function getToken() {
+  const { getAccessTokenSilently } = useAuth0()
+  try {
+    const token = await getAccessTokenSilently({
+      authorizationParams: {
+        audience: import.meta.env.VITE_AUTH0_AUDIENCE
+      }
+    })
+    return token
+  }
+  catch (e) {
+    console.error(e)
+  }
+}
+
+export const addProduct = async (product) {
+  const token = await getToken()
+  const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/products`, {
     method: 'POST',
     body: product,
     headers: {
@@ -8,12 +25,13 @@ export const addProduct = async (product, token: string) {
     }
   })
   if (res.ok) {
-    return await res.json()
+    alert("Action was commited!")
   }
 }
 
-export const updateProduct = async (product, token: string, id: number) => {
-  const res = await fetch(`http://localhost:8080/api/admin/products/${id}`, {
+export const updateProduct = async (product, id: number) => {
+  const token = await getToken()
+  const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/products/${id}`, {
     method: 'PUT',
     body: product,
     headers: {
@@ -21,36 +39,39 @@ export const updateProduct = async (product, token: string, id: number) => {
     }
   })
   if (res.ok) {
-    return await res.json()
+    alert("Action was commited!")
   }
 }
 
-export const deleteProduct = async (token: string, id: number) => {
-  const res = await fetch(`http://localhost:8080/api/admin/products/${id}`, {
+export const deleteProduct = async (id: number) => {
+  const token = await getToken()
+  const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/products/${id}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`
     }
   })
   if (res.ok) {
-    return await res.json()
+    alert("Action was commited!")
   }
 }
 
-export const getCategories = async (token: string) => {
-  const res = await fetch("http://localhost:8080/api/admin/category", {
+export const getCategories = async () => {
+  const token = await getToken()
+  const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/category`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`
     }
   })
   if (res.ok) {
-    return await res.json()
+    alert("Action was commited!")
   }
 }
 
-export const createCategory = async (category, token: string) => {
-  const res = await fetch("http://localhost:8080/api/admin/category", {
+export const createCategory = async (category) => {
+  const token = await getToken()
+  const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/category`, {
     method: 'POST',
     body: category,
     headers: {
@@ -58,12 +79,13 @@ export const createCategory = async (category, token: string) => {
     }
   })
   if (res.ok) {
-    return await res.json()
+    alert("Action was commited!")
   }
 }
 
-export const updateCategory = async (category, token: string, id: number) => {
-  const res = await fetch(`http://localhost:8080/api/admin/category/${id}`, {
+export const updateCategory = async (category, id: number) => {
+  const token = await getToken()
+  const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/category/${id}`, {
     method: 'PUT',
     body: category,
     headers: {
@@ -71,18 +93,19 @@ export const updateCategory = async (category, token: string, id: number) => {
     }
   })
   if (res.ok) {
-    return await res.json()
+    alert("Action was commited!")
   }
 }
 
-export const deleteCategory = async (token: string, id: number) => {
-  const res = await fetch(`http://localhost:8080/api/admin/category/${id}`, {
+export const deleteCategory = async (id: number) => {
+  const token = await getToken()
+  const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/category/${id}`, {
     method: 'DELETE',
     headers: {
       authorization: `bearer ${token}`
     }
   })
   if (res.ok) {
-    return await res.json()
+    alert("Action was commited!")
   }
 }
