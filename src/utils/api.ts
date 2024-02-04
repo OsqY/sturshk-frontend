@@ -1,22 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react"
 
-async function getToken() {
-  const { getAccessTokenSilently } = useAuth0()
-  try {
-    const token = await getAccessTokenSilently({
-      authorizationParams: {
-        audience: import.meta.env.VITE_AUTH0_AUDIENCE
-      }
-    })
-    return token
-  }
-  catch (e) {
-    console.error(e)
-  }
-}
-
-export const addProduct = async (product) {
-  const token = await getToken()
+export const addProduct = async (product, token: string) => {
   const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/products`, {
     method: 'POST',
     body: product,
@@ -29,8 +13,7 @@ export const addProduct = async (product) {
   }
 }
 
-export const updateProduct = async (product, id: number) => {
-  const token = await getToken()
+export const updateProduct = async (product, id: number, token: string) => {
   const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/products/${id}`, {
     method: 'PUT',
     body: product,
@@ -43,8 +26,7 @@ export const updateProduct = async (product, id: number) => {
   }
 }
 
-export const deleteProduct = async (id: number) => {
-  const token = await getToken()
+export const deleteProduct = async (id: number, token: string) => {
   const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/products/${id}`, {
     method: 'DELETE',
     headers: {
@@ -56,21 +38,17 @@ export const deleteProduct = async (id: number) => {
   }
 }
 
-export const getCategories = async () => {
-  const token = await getToken()
+export const getCategories = async (token: string | null) => {
   const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/category`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`
     }
   })
-  if (res.ok) {
-    alert("Action was commited!")
-  }
+  return await res.json()
 }
 
-export const createCategory = async (category) => {
-  const token = await getToken()
+export const createCategory = async (category, token: string) => {
   const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/category`, {
     method: 'POST',
     body: category,
@@ -83,8 +61,7 @@ export const createCategory = async (category) => {
   }
 }
 
-export const updateCategory = async (category, id: number) => {
-  const token = await getToken()
+export const updateCategory = async (category, id: number, token: string) => {
   const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/category/${id}`, {
     method: 'PUT',
     body: category,
@@ -97,8 +74,7 @@ export const updateCategory = async (category, id: number) => {
   }
 }
 
-export const deleteCategory = async (id: number) => {
-  const token = await getToken()
+export const deleteCategory = async (id: number, token: string) => {
   const res = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/admin/category/${id}`, {
     method: 'DELETE',
     headers: {
